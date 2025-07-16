@@ -1,4 +1,4 @@
-:root {
+root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 300;
@@ -6,7 +6,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #ffffff;
-
+  height: 100%;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,7 +18,8 @@ body {
   margin: 0;
   position: relative;
   z-index: 0;
-  overflow: hidden;
+  height: 100%;
+  overflow: auto;
   min-width: 320px;
   min-height: 100vh;
   /* 保留背景图片 */
@@ -43,5 +44,4 @@ body::before {
 
   z-index: -1; /* 放在最底层 */
 }
-
 

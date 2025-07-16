@@ -10,9 +10,11 @@ import {
 } from '@ant-design/icons';
 
 import LoginPage from './pages/login.jsx';
+import RegisterPage from "./pages/register.jsx";
 
 
 const { Header, Content } = Layout;
+
 
 export default function App() {
     return (
@@ -34,17 +36,18 @@ export default function App() {
                             <Link to="/categories">分类</Link>
                         </Menu.Item>
                         <Menu.Item key="/about" icon={<InfoCircleOutlined />}>
-                            <Link to="/about">关于</Link>
+                            <Link to="/about">抽盒机</Link>
                         </Menu.Item>
                         <Menu.Item key="/cart" icon={<ShoppingCartOutlined />}>
-                            <Link to="/cart">购物车</Link>
+                            <Link to="/cart">玩家秀</Link>
                         </Menu.Item>
                     </Menu>
                 </Header>
             <Content style={{ padding: '0' }}>
                 <Routes>
                     <Route path="/login" element={<LoginPage />} />
-                    <Route>path="/home" element={this}</Route>
+                    <Route path="/home" element={<div>首页内容</div>} />
+                    <Route path="/register" element={<RegisterPage />} />
                     {/*<Route path="/categories" element={<Categories />} />*/}
                     {/*<Route path="/about" element={<About />} />*/}
                     {/*<Route path="/cart" element={<Cart />} />*/}

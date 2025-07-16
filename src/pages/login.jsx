@@ -1,11 +1,40 @@
 import React from 'react';
 import { Form, Input, Button, Checkbox, Card, message } from 'antd';
 import './login.css';
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
 const LoginPage = () => {
-    const onFinish = (values) => {
-        console.log('登录成功:', values);
-        message.success('登录成功');
-        // 这里可以调用后端接口进行登录验证
+    // const onFinish = (values) => {
+    //     console.log('登录成功:', values);
+    //     message.success('登录成功');
+    //     // 这里可以调用后端接口进行登录验证
+    // };
+    //
+    // const onFinishFailed = (errorInfo) => {
+    //     console.log('登录失败:', errorInfo);
+    //     message.error('请检查输入');
+    // };
+    const navigate = useNavigate();
+    const onFinish = async (values) => {
+        try {
+            const response = await axios.post('http://localhost:7002/user/login', {
+                phone: values.phone,
+                password: values.password,
+            });
+
+            const { success, message: msg, token } = response.data;
+
+            if (success) {
+                message.success(msg || '登录成功');
+                localStorage.setItem('token', token); // 保存 token
+                navigate('/home'); // 跳转到首页
+            } else {
+                message.error(msg || '用户名或密码错误');
+            }
+        } catch (error) {
+            console.error('请求错误:', error);
+            message.error('登录失败，服务器异常');
+        }
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -30,12 +59,16 @@ const LoginPage = () => {
                     autoComplete="off"
                 >
                     <Form.Item
-                        name="username"
-                        rules={[{ required: true, message: '请输入用户名！' }]}
-                    >
-                        <Input placeholder="用户名" />
+                        name="phone"
+                        rules={[
+                            { required: true, message: '请输入手机号' },
+                            {
+                                pattern: /^1[3-9]\d{9}$/,
+                                message: '请输入合法的中国手机号',
+                            },
+                        ]}>
+                        <Input placeholder="手机号" />
                     </Form.Item>
-
                     <Form.Item
                         name="password"
                         rules={[{ required: true, message: '请输入密码！' }]}
@@ -53,6 +86,9 @@ const LoginPage = () => {
                         </Button>
                     </Form.Item>
                 </Form>
+                <div style={{ textAlign: 'right', marginTop: 8 }}>
+                    <Link to="/register">去注册</Link>
+                </div>
             </Card>
         </div>
     );
