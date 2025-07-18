@@ -27,6 +27,16 @@ const LoginPage = () => {
             if (success) {
                 message.success(msg || '登录成功');
                 localStorage.setItem('token', token); // 保存 token
+                const res = await axios.get('http://localhost:7002/user/profile');
+                if (res.data.success) {
+                    const user=res.data.data;
+                    localStorage.setItem('username', user.username);
+                    localStorage.setItem('avatar', user.avatar);
+                    localStorage.setItem('introduction', user.introduction || '');
+                    localStorage.setItem('address', user.address || '');
+                    localStorage.setItem('balance', user.balance || 0);
+                }
+                window.location.href = '/';
                 navigate('/home'); // 跳转到首页
             } else {
                 message.error(msg || '用户名或密码错误');
