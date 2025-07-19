@@ -46,7 +46,7 @@ export default function App() {
                     boxShadow: 'none',
                 }}>
                     <Menu theme="light" mode="horizontal" defaultSelectedKeys={['/']} selectedKeys={[location.pathname]} className="custom-menu">
-                        <Menu.Item
+                        {!username&&<Menu.Item
                             key="/login"
                             icon={<LockOutlined />}
                             onClick={() => {
@@ -58,10 +58,9 @@ export default function App() {
                                 } else {
                                     navigate('/login');
                                 }
-                            }}
-                        >
+                            }}>
                             登录
-                        </Menu.Item>
+                        </Menu.Item>}
                         <Menu.Item key="/home" icon={<HomeOutlined />}>
                             <Link to="/home">首页</Link>
                         </Menu.Item>
@@ -77,9 +76,9 @@ export default function App() {
                         <Menu.Item key="/profile" icon={<UserOutlined />}>
                             <Link to="/profile">个人主页</Link>
                         </Menu.Item>
-                        <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={logout}>
+                        {username&&<Menu.Item key="logout" icon={<LogoutOutlined />} onClick={logout}>
                             退出登录
-                        </Menu.Item>
+                        </Menu.Item>}
                         {username&& <Menu.Item
                             key="user"
                             style={{
