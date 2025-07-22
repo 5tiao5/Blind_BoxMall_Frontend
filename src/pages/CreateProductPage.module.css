@@ -1,0 +1,23 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.previewImage {
+    width: 100px;
+    margin-top: 10px;
+}
+
+.blindBoxCard {
+    margin-bottom: 12px;
+}
+
+.blindBoxImage {
+    width: 100px;
+}
+.probabilityTotal {
+    font-weight: bold;
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: #555;
+}
