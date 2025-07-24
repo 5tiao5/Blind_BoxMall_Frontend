@@ -40,7 +40,7 @@ body::before {
   height: 100%;
 
   /* ✅ 设置半透明白色遮罩层 */
-  background-color: rgba(255, 255, 255, 0.3); /* 白色 + 50% 透明度 */
+  background-color: rgba(255, 255, 255, 0.42); /* 白色 + 50% 透明度 */
 
   z-index: -1; /* 放在最底层 */
 }

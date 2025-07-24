@@ -1,0 +1,33 @@
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.uploadButton {
+    margin-top: 8px;
+}
+
+.imagePreview {
+    display: block;
+    max-width: 120px;
+    margin-top: 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.blindBoxList {
+    margin-top: 16px;
+}
+
+.addButton {
+    margin-top: 16px;
+    width: 100%;
+}
+.card{
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+

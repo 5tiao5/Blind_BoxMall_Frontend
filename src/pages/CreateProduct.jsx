@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Form, Input, InputNumber, Button, Upload, Space, Card, message } from 'antd';
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import axios from 'axios';
-import styles from './CreateProductPage.module.css'; // 👈 引入样式模块
+import {Button, Card, Form, Input, InputNumber, message, Space, Upload} from "antd";
+import React, {useState} from "react";
+import axios from "axios";
+import styles from "./CreateProductPage.module.css";
+import {PlusOutlined, UploadOutlined} from "@ant-design/icons";
 
 const CreateProductPage = () => {
     const [form] = Form.useForm();
@@ -11,7 +11,7 @@ const CreateProductPage = () => {
     const totalProbability = blindBoxes.reduce((sum, item) => sum + Number(item.probability || 0), 0);
 
     const handleAddBlindBox = () => {
-        setBlindBoxes([...blindBoxes, { name: '', image: '', probability: 1, serialNumber: '' }]);
+        setBlindBoxes([...blindBoxes, { name: '', image: '', probability: 0, serialNumber: '' }]);
     };
 
     const handleBlindBoxChange = (index, field, value) => {
@@ -75,7 +75,7 @@ const CreateProductPage = () => {
                 </Form.Item>
 
                 <Form.Item label="商品描述" name="description">
-                    <Input.TextArea rows={3} />
+                    <Input.TextArea rows={2} />
                 </Form.Item>
 
                 <Form.Item label="价格" name="price" rules={[{ required: true }]}>

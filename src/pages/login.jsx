@@ -3,9 +3,11 @@ import { Form, Input, Button, Checkbox, Card, message } from 'antd';
 import styles from './login.module.css'; // CSS Module
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {useUser} from "../components/UserContext.jsx";
 
 const LoginPage = () => {
     const navigate = useNavigate();
+    const { updateUser } = useUser();
     const goToAdminVerify = () => {
         navigate('/admin-verify');
     };
@@ -30,6 +32,7 @@ const LoginPage = () => {
                     localStorage.setItem('introduction', user.introduction || '');
                     localStorage.setItem('address', user.address || '');
                     localStorage.setItem('balance', user.balance || 0);
+                    updateUser(user);
                 }
 
                 window.location.href = '/home';

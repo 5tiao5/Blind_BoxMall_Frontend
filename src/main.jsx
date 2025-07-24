@@ -5,6 +5,7 @@ import App from './App.jsx';
 import LoginPage from "./pages/login.jsx";
 import axios from 'axios';
 import { BrowserRouter } from 'react-router-dom';
+import {UserProvider} from "./components/UserContext.jsx";
 // 设置请求拦截器：自动附带 token
 axios.interceptors.request.use(
     (config) => {
@@ -20,7 +21,9 @@ axios.interceptors.request.use(
 createRoot(document.getElementById('root')).render(
   <StrictMode>
       <BrowserRouter>
-        <App />
+          <UserProvider>
+                 <App />
+              </UserProvider>
       </BrowserRouter>
   </StrictMode>
 );

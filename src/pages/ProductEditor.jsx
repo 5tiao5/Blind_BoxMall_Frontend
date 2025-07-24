@@ -3,11 +3,13 @@ import { Form, Input, InputNumber, Button, Upload, Space, Card, message } from '
 import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
 import BlindBoxItemEditor from './BlindBoxItemEditor';
 import axios from 'axios';
+import styles from './ProductEditor.module.css'; // 引入 CSS Module
 
 export default function ProductEditor({ product, onBack }) {
     const [form] = Form.useForm();
     const [blindBoxes, setBlindBoxes] = useState([]);
     const [imageUrl, setImageUrl] = useState(product?.image || '');
+    const totalProbability = blindBoxes.reduce((sum, item) => sum + Number(item.probability || 0), 0);
 
     useEffect(() => {
         if (product?.id) {
@@ -55,45 +57,51 @@ export default function ProductEditor({ product, onBack }) {
     };
 
     return (
-        <Card title="编辑商品" extra={<Button onClick={onBack}>返回</Button>}>
-            <Form form={form} layout="vertical" onFinish={handleSubmit}>
-                <Form.Item label="名称" name="name" rules={[{ required: true }]}>
-                    <Input />
-                </Form.Item>
-                <Form.Item label="描述" name="description">
-                    <Input.TextArea rows={2} />
-                </Form.Item>
-                <Form.Item label="价格" name="price" rules={[{ required: true }]}>
-                    <InputNumber style={{ width: '100%' }} />
-                </Form.Item>
-                <Form.Item label="抽奖规则" name="rules">
-                    <Input.TextArea rows={2} />
-                </Form.Item>
-                <Form.Item label="商品图片">
-                    <Upload showUploadList={false} customRequest={handleImageUpload}>
-                        <Button icon={<UploadOutlined />}>上传图片</Button>
-                    </Upload>
-                    {imageUrl && <img src={imageUrl} style={{ maxWidth: 100, marginTop: 8 }} />}
-                </Form.Item>
+            <Card title="编辑商品" extra={<Button onClick={onBack}>返回</Button>} className={styles.card}>
+                <Form form={form} layout="vertical" onFinish={handleSubmit}>
+                    <Form.Item label="名称" name="name" rules={[{ required: true }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="描述" name="description">
+                        <Input.TextArea rows={2} />
+                    </Form.Item>
+                    <Form.Item label="价格" name="price" rules={[{ required: true }]}>
+                        <InputNumber style={{ width: '100%' }} />
+                    </Form.Item>
+                    <Form.Item label="抽奖规则" name="rules">
+                        <Input.TextArea rows={2}/>
+                    </Form.Item>
+                    <Form.Item label="商品图片">
+                        <Upload showUploadList={false} customRequest={handleImageUpload}>
+                            <Button icon={<UploadOutlined />} className={styles.uploadButton}>上传图片</Button>
+                        </Upload>
+                        {imageUrl && <img src={imageUrl} alt="preview" className={styles.imagePreview} />}
+                    </Form.Item>
 
-                <Form.Item label="盲盒内容">
-                    {blindBoxes.map((item, index) => (
-                        <BlindBoxItemEditor
-                            key={index}
-                            index={index}
-                            item={item}
-                            onChange={(val) => updateBlindBox(index, val)}
-                        />
-                    ))}
-                    <Button icon={<PlusOutlined />} onClick={addBlindBox} style={{ marginTop: 12 }}>
-                        添加盲盒项
-                    </Button>
-                </Form.Item>
+                    <Form.Item label="盲盒内容" className={styles.blindBoxList}>
+                        <div style={{ marginBottom: 12 }}>
+                            当前盲盒总概率：{(totalProbability * 100).toFixed(2)}%
+                            {totalProbability > 1 && (
+                                <span style={{ color: 'red', marginLeft: 8 }}>（已超过 100%）</span>
+                            )}
+                        </div>
+                        {blindBoxes.map((item, index) => (
+                            <BlindBoxItemEditor
+                                key={index}
+                                index={index}
+                                item={item}
+                                onChange={(val) => updateBlindBox(index, val)}
+                            />
+                        ))}
+                        <Button icon={<PlusOutlined />} onClick={addBlindBox} className={styles.addButton}>
+                            添加盲盒项
+                        </Button>
+                    </Form.Item>
 
-                <Form.Item>
-                    <Button type="primary" htmlType="submit">保存修改</Button>
-                </Form.Item>
-            </Form>
-        </Card>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit">保存修改</Button>
+                    </Form.Item>
+                </Form>
+            </Card>
     );
 }

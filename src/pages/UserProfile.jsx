@@ -2,16 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { Card, Avatar, Upload, Input, Button, message, Form, List } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
-
+import { useUser} from "../components/UserContext.jsx";
 const UserProfile = () => {
     const [form] = Form.useForm();
     const [userInfo, setUserInfo] = useState({});
     const [orders, setOrders] = useState([]);
-
+    const { updateUser } = useUser();
     const fetchUserInfo = async () => {
         const res = await axios.get('http://localhost:7002/user/profile');
         if (res.data.success) {
+            const newData = res.data.data;
             setUserInfo(res.data.data);
+            updateUser({
+                username: newData.username,
+                avatar: newData.avatar,
+            });
             form.setFieldsValue(res.data.data);
         }
     };
@@ -40,6 +45,7 @@ const UserProfile = () => {
     const handleSave = async (values) => {
         const res = await axios.post('http://localhost:7002/user/update', values);
         if (res.data.success) {
+            console.log(values);
             message.success('信息更新成功');
             fetchUserInfo();
         } else {

@@ -10,25 +10,16 @@ import {
     LogoutOutlined,
 } from '@ant-design/icons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useUser } from '../components/UserContext.jsx'
 
 export default function NavBarmy() {
     const location = useLocation();
     const navigate = useNavigate();
-    const [username, setUsername] = useState('');
-    const [avatar, setAvatar] = useState('');
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            setUsername(localStorage.getItem('username') || '');
-            setAvatar(localStorage.getItem('avatar') || '');
-        }
-    }, []);
+    const { user, clearUser } = useUser();
+    const { username, avatar } = user;
 
     const logout = () => {
-        localStorage.clear();
-        setUsername('');
-        setAvatar('');
+        clearUser();
         navigate('/login');
     };
 
@@ -55,14 +46,14 @@ export default function NavBarmy() {
                     登录
                 </Menu.Item>
             )}
-            <Menu.Item key="/home" icon={<HomeOutlined />}>
-                <Link to="/home">首页</Link>
-            </Menu.Item>
+            {/*<Menu.Item key="/home" icon={<HomeOutlined />}>*/}
+            {/*    <Link to="/home">首页</Link>*/}
+            {/*</Menu.Item>*/}
             <Menu.Item key="/categories" icon={<AppstoreOutlined />}>
                 <Link to="/categories">分类</Link>
             </Menu.Item>
-            <Menu.Item key="/about" icon={<InfoCircleOutlined />}>
-                <Link to="/about">抽盒机</Link>
+            <Menu.Item key="/home" icon={<InfoCircleOutlined />}>
+                <Link to="/home">抽盒机</Link>
             </Menu.Item>
             <Menu.Item key="/cart" icon={<ShoppingCartOutlined />}>
                 <Link to="/cart">玩家秀</Link>
