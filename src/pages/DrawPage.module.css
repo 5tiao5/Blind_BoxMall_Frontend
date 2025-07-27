@@ -1,16 +1,19 @@
 .container {
-    padding: 24px;
+    padding: 160px;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 2px;
+    grid-template-columns: repeat(auto-fit, 100px); /* 每格固定宽度，不拉伸 */
+    justify-content: center; /* ✅ 让所有小方格整体居中 */
+    gap: 1px;
+    margin: 0 auto;
     max-width: 800px;
-    width: 100%;
+    width: fit-content;;
 }
 
 .box {
@@ -74,4 +77,17 @@
 
 .drawBtn:hover {
     background: #407fc7;
+}
+.detailButtonContainer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.detailButton {
+    padding: 8px 16px;
+    background-color: rgba(173, 216, 230, 0.5); /* 鲜黄色 */
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
 }

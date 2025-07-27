@@ -55,7 +55,24 @@ export default function ProductEditor({ product, onBack }) {
             onBack();
         }
     };
+    const handleResetBox = async () => {
+        if (!product?.id) {
+            message.error('商品ID不存在，无法重置盲盒状态');
+            return;
+        }
 
+        try {
+            const res = await axios.post(`http://localhost:7002/draw/reset/${product.id}`);
+            if (res.data.success) {
+                message.success('重置盲盒状态成功');
+            } else {
+                message.error('重置盲盒失败：' + res.data.message);
+            }
+        } catch (err) {
+            message.error('请求出错，无法重置盲盒');
+            console.error(err);
+        }
+    };
     return (
             <Card title="编辑商品" extra={<Button onClick={onBack}>返回</Button>} className={styles.card}>
                 <Form form={form} layout="vertical" onFinish={handleSubmit}>
@@ -102,6 +119,7 @@ export default function ProductEditor({ product, onBack }) {
                         <Button type="primary" htmlType="submit">保存修改</Button>
                     </Form.Item>
                 </Form>
+                <Button type="primary" onClick={handleResetBox}>重置盲盒状态</Button>
             </Card>
     );
 }
