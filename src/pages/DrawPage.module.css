@@ -91,3 +91,10 @@
     font-weight: bold;
     cursor: pointer;
 }
+.checkbox {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    transform: scale(1.2);
+}
+

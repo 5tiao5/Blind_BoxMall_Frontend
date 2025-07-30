@@ -12,6 +12,7 @@ import ProductManagerPage from "./pages/ProductManagerPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import DrawPage from "./pages/DrawPage.jsx";
 import ProductDetailPage from "./pages/ProductDetailPage.jsx";
+import SettlePage from "./pages/SettlePage.jsx";
 
 const { Header, Content } = Layout;
 
@@ -56,6 +57,7 @@ export default function App() {
                     <Route path="/app" element={<this />} />
                     <Route path="/navbar" element={<NavBarmy />} />
                     <Route path="/product-detail/:productId" element={<ProductDetailPage />} />
+                    <Route path="/settle/:orderId" element={<SettlePage />} />
                     {/*<Route path="/product-create" element={<CreateProduct />} />*/}
                     <Route path="/admin/products" element={<ProductManagerPage />} />
                 </Routes>

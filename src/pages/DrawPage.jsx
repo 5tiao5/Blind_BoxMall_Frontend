@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styles from './DrawPage.module.css';
 import logo from '/src/assets/boxlogo.png';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 export default function DrawPage() {
     const { productId } = useParams();
     const [blindBoxes, setBlindBoxes] = useState([]);
+    const [selectMode, setSelectMode] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        // 获取盲盒状态
         axios.get(`http://localhost:7002/draw/${productId}`).then(res => {
             if (res.data.success) {
                 setBlindBoxes(res.data.data || []);
@@ -19,26 +19,24 @@ export default function DrawPage() {
         });
     }, [productId]);
 
-    const handleBoxClick = async (index) => {
-        // 如果该盲盒已经抽中，则不允许再次抽取
-        if (blindBoxes[index].isDrawn) {
-            alert('该盲盒已被抽中');
+    const handleSelectOne = () => {
+        setSelectMode(true); // 开启选择模式
+    };
+
+    const handleConfirmDraw = async () => {
+        if (selectedIndex === null) {
+            alert('请选择一个盲盒');
             return;
         }
 
-        // 请求后端标记该盲盒为已抽中
         const res = await axios.post('http://localhost:7002/draw/mark', {
-            productId: productId,
-            indexes: [index],
+            productId,
+            indexes: [selectedIndex],
         });
 
-        if (res.data.success) {
-            // 更新前端状态，显示已抽中
-            const updatedBlindBoxes = [...blindBoxes];
-            updatedBlindBoxes[index].isDrawn = true;
-            setBlindBoxes(updatedBlindBoxes);
+        if (res.data.success && res.data.data?.orderId) {
+            navigate(`/settle/${res.data.data.orderId}`);
         } else {
-            console.log(res.data);
             alert('抽奖失败');
         }
     };
@@ -47,23 +45,42 @@ export default function DrawPage() {
         <div className={styles.container}>
             <div className={styles.grid}>
                 {blindBoxes.map((box, index) => (
-                    <div key={index} className={styles.box} onClick={() => handleBoxClick(index)}>
-                        {/* 左上角序号显示 */}
-                        <div className={styles.serial}>{box.index + 1}</div>
+                    <div key={index} className={styles.box}>
+                        <div className={styles.serial}>{index + 1}</div>
 
-                        {/* 中央内容：已售出 or logo */}
                         {box.isDrawn ? (
                             <div className={styles.sold}>已售出</div>
                         ) : (
-                            <img src={logo} alt="未抽" className={styles.logo} />
+                            <>
+                                <img
+                                    src={logo}
+                                    alt="未抽"
+                                    className={styles.logo}
+                                    style={{ opacity: selectMode && selectedIndex === index ? 0.5 : 1 }}
+                                />
+                                {selectMode && !box.isDrawn && (
+                                    <input
+                                        type="checkbox"
+                                        className={styles.checkbox}
+                                        checked={selectedIndex === index}
+                                        onChange={() => setSelectedIndex(index)}
+                                    />
+                                )}
+                            </>
                         )}
                     </div>
                 ))}
             </div>
 
             <div className={styles.buttons}>
-                <button className={styles.drawBtn}>一次抽多盒</button>
-                <button className={styles.drawBtn}>随机选一盒</button>
+                <button className={styles.drawBtn} onClick={handleSelectOne}>
+                    随机选一盒
+                </button>
+                {selectMode && (
+                    <button className={styles.drawBtn} onClick={handleConfirmDraw}>
+                        确认抽取
+                    </button>
+                )}
             </div>
 
             <div className={styles.detailButtonContainer}>
