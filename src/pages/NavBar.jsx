@@ -7,7 +7,7 @@ import {
     ShoppingCartOutlined,
     LockOutlined,
     UserOutlined,
-    LogoutOutlined,
+    LogoutOutlined, ProfileOutlined,
 } from '@ant-design/icons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from '../components/UserContext.jsx'
@@ -60,6 +60,9 @@ export default function NavBarmy() {
             </Menu.Item>
             <Menu.Item key="/profile" icon={<UserOutlined />}>
                 <Link to="/profile">个人主页</Link>
+            </Menu.Item>
+            <Menu.Item key="/orderlist" icon={<ProfileOutlined />}>
+                <Link to="/order/list">订单管理</Link>
             </Menu.Item>
             {username && (
                 <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={logout}>

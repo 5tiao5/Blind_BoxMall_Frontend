@@ -13,6 +13,8 @@ import HomePage from "./pages/HomePage.jsx";
 import DrawPage from "./pages/DrawPage.jsx";
 import ProductDetailPage from "./pages/ProductDetailPage.jsx";
 import SettlePage from "./pages/SettlePage.jsx";
+import SettleMultiPage from "./pages/SettleMultiPage.jsx";
+import OrderListPage from "./pages/OrderListPage.jsx";
 
 const { Header, Content } = Layout;
 
@@ -58,6 +60,8 @@ export default function App() {
                     <Route path="/navbar" element={<NavBarmy />} />
                     <Route path="/product-detail/:productId" element={<ProductDetailPage />} />
                     <Route path="/settle/:orderId" element={<SettlePage />} />
+                    <Route path="/settle-multi" element={<SettleMultiPage />} />
+                    <Route path="/order/list" element={<OrderListPage />} />
                     {/*<Route path="/product-create" element={<CreateProduct />} />*/}
                     <Route path="/admin/products" element={<ProductManagerPage />} />
                 </Routes>

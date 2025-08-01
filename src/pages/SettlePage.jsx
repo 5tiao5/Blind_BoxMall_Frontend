@@ -52,8 +52,11 @@ export default function SettlePage() {
             <h2 className={styles.title}>订单结算</h2>
             {!paid ? (
                 <>
-                    <p className={styles.priceText}>请支付 ¥{order.product.price}</p>
-                    <button onClick={handlePay} className={styles.payBtn}>确认支付</button>
+                    <p className={styles.priceText}>请支付 {order.product.price}元</p>
+                    <div className={styles.buttonGroup}>
+                        <button onClick={handlePay} className={styles.payBtn}>确认支付</button>
+                        <button onClick={handleBack} className={styles.payBtn}>取消支付</button>
+                    </div>
                 </>
             ) : !showResult ? (
                 <div className={styles.animContainer}>
