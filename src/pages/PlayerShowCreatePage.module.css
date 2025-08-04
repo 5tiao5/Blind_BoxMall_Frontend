@@ -1,0 +1,67 @@
+.card {
+    width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+h2 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 24px;
+}
+
+.ant-input,
+.ant-input-textarea,
+.ant-select,
+.ant-upload-wrapper {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.ant-input,
+.ant-input-textarea,
+.ant-select-selector {
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.ant-btn-primary {
+    margin-top: 20px;
+    width: 100%;
+    background: #3399ff;
+    border-color: #3399ff;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.ant-btn-primary:hover {
+    background: #007acc;
+    border-color: #007acc;
+}
+.optionItem {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
+
+.optionImage {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.optionText {
+    font-size: 14px;
+    color: #333;
+}

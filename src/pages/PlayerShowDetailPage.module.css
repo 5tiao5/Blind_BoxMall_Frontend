@@ -1,0 +1,151 @@
+.detail {
+    max-width: 550px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #003366;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    color: #222;
+}
+
+.time {
+    font-size: 12px;
+    color: #888;
+}
+
+.imageArea {
+    position: relative;
+    width: 70%;
+    max-width: 600px;
+    margin: 16px auto;
+    display: flex;              /* ✅ 使用 flex 让图片居中 */
+    justify-content: center;
+    align-items: center;
+    height: 300px;              /* ✅ 固定高度用于居中图片 */
+    border-radius: 12px;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.imageArea img {
+    width: 65%;
+    max-width: 100%;           /* ✅ 不会超出容器 */
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    z-index: 0;
+}
+.prevImg {
+    position: absolute;
+    left: 10px;
+    top:50%;
+    font-size: 28px;
+    color: #333;
+    cursor: pointer;
+    z-index: 1;
+}
+.nextImg {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 12px 0 4px;
+    color: #333;
+    text-align: left;
+}
+
+.content {
+    font-size: 14px;
+    margin: 8px 0;
+    color: #444;
+    line-height: 1.5;
+}
+.productInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.productImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.likeArea {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    user-select: none;
+}
+
+.commentArea {
+    margin-top: 10px;
+}
+
+.commentArea h4 {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.commentContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+}
+
+.commentTime {
+    font-size: 12px;
+    color: #999;
+    white-space: nowrap;
+}

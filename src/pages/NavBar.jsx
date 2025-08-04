@@ -55,8 +55,8 @@ export default function NavBarmy() {
             <Menu.Item key="/home" icon={<InfoCircleOutlined />}>
                 <Link to="/home">抽盒机</Link>
             </Menu.Item>
-            <Menu.Item key="/cart" icon={<ShoppingCartOutlined />}>
-                <Link to="/cart">玩家秀</Link>
+            <Menu.Item key="/playershow" icon={<ShoppingCartOutlined />}>
+                <Link to="/playershow">玩家秀</Link>
             </Menu.Item>
             <Menu.Item key="/profile" icon={<UserOutlined />}>
                 <Link to="/profile">个人主页</Link>

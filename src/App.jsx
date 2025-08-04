@@ -15,7 +15,9 @@ import ProductDetailPage from "./pages/ProductDetailPage.jsx";
 import SettlePage from "./pages/SettlePage.jsx";
 import SettleMultiPage from "./pages/SettleMultiPage.jsx";
 import OrderListPage from "./pages/OrderListPage.jsx";
-
+import PlayerShowList from "./pages/PlayerShowList.jsx";
+import PlayerShowCreatePage from "./pages/PlayerShowCreatePage.jsx";
+import PlayerShowDetailPage from "./pages/PlayerShowDetailPage.jsx";
 const { Header, Content } = Layout;
 
 
@@ -62,6 +64,9 @@ export default function App() {
                     <Route path="/settle/:orderId" element={<SettlePage />} />
                     <Route path="/settle-multi" element={<SettleMultiPage />} />
                     <Route path="/order/list" element={<OrderListPage />} />
+                    <Route path="/playershow" element={<PlayerShowList />} />
+                    <Route path="/playershow/create" element={<PlayerShowCreatePage />} />
+                    <Route path="/playershow/detail/:id" element={<PlayerShowDetailPage />} />
                     {/*<Route path="/product-create" element={<CreateProduct />} />*/}
                     <Route path="/admin/products" element={<ProductManagerPage />} />
                 </Routes>
