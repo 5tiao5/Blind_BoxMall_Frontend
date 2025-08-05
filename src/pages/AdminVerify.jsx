@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Card, Input, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const AdminVerify = () => {
     const [code, setCode] = useState('');
     const navigate = useNavigate();
 
-    const handleVerify = () => {
-        const correctCode = 'mmx-181314-1'; // 写死的身份码
-        if (code === correctCode) {
+    const handleVerify = async () => {
+        const correctCode = await axios.post('http://localhost:7002/admin/login', {
+            code: code,
+        });
+        console.log(correctCode);
+        if (correctCode.data.success) {
             localStorage.setItem('isAdmin', 'true');
             message.success('验证成功，欢迎管理员');
             //navigate('/product-create');

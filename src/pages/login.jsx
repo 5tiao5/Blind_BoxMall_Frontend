@@ -53,7 +53,7 @@ const LoginPage = () => {
 
     return (
         <div className={styles.loginPage}>
-            <Card title="登录" className={styles.loginCard}>
+            <Card title="盲盒商城 登录" className={styles.loginCard}>
                 <Form
                     name="login"
                     initialValues={{ remember: true }}

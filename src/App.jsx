@@ -18,6 +18,7 @@ import OrderListPage from "./pages/OrderListPage.jsx";
 import PlayerShowList from "./pages/PlayerShowList.jsx";
 import PlayerShowCreatePage from "./pages/PlayerShowCreatePage.jsx";
 import PlayerShowDetailPage from "./pages/PlayerShowDetailPage.jsx";
+import SearchProductPage from "./pages/SearchProductPage.jsx";
 const { Header, Content } = Layout;
 
 
@@ -50,7 +51,7 @@ export default function App() {
                         }
                     />
                     {/*<Route path="/" element={<div>首页内容</div>} />*/}
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/" element={<LoginPage />} />
                     <Route path="/admin-verify" element={<AdminVerify />} />
                     <Route path="/draw/:productId" element={<DrawPage />} />
                     {/* 其他路由保留注释或启用 */}
@@ -63,12 +64,26 @@ export default function App() {
                     <Route path="/product-detail/:productId" element={<ProductDetailPage />} />
                     <Route path="/settle/:orderId" element={<SettlePage />} />
                     <Route path="/settle-multi" element={<SettleMultiPage />} />
-                    <Route path="/order/list" element={<OrderListPage />} />
-                    <Route path="/playershow" element={<PlayerShowList />} />
+                    <Route path="/order/list" element={
+                        <PrivateRoute>
+                            <OrderListPage />
+                        </PrivateRoute>
+                    } />
+                    <Route path="/playershow" element={
+                        <PrivateRoute>
+                            <PlayerShowList />
+                        </PrivateRoute>
+                    } />
                     <Route path="/playershow/create" element={<PlayerShowCreatePage />} />
                     <Route path="/playershow/detail/:id" element={<PlayerShowDetailPage />} />
                     {/*<Route path="/product-create" element={<CreateProduct />} />*/}
                     <Route path="/admin/products" element={<ProductManagerPage />} />
+                    <Route path="/search" element={
+                        <PrivateRoute>
+                            <SearchProductPage />
+                        </PrivateRoute>
+                    } />
+
                 </Routes>
             </Content>
         </Layout>

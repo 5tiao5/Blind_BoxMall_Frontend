@@ -7,7 +7,7 @@ import {
     ShoppingCartOutlined,
     LockOutlined,
     UserOutlined,
-    LogoutOutlined, ProfileOutlined,
+    LogoutOutlined, ProfileOutlined, SearchOutlined,
 } from '@ant-design/icons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from '../components/UserContext.jsx'
@@ -49,8 +49,8 @@ export default function NavBarmy() {
             {/*<Menu.Item key="/home" icon={<HomeOutlined />}>*/}
             {/*    <Link to="/home">首页</Link>*/}
             {/*</Menu.Item>*/}
-            <Menu.Item key="/categories" icon={<AppstoreOutlined />}>
-                <Link to="/categories">分类</Link>
+            <Menu.Item key="/search" icon={<SearchOutlined />}>
+                <Link to="/search">搜索</Link>
             </Menu.Item>
             <Menu.Item key="/home" icon={<InfoCircleOutlined />}>
                 <Link to="/home">抽盒机</Link>

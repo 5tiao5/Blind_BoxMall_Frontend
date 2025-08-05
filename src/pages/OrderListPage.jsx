@@ -31,7 +31,7 @@ export default function OrderListPage() {
         if (res.data.success) {
             //alert('支付成功');
             message.success('支付成功');
-            fetchOrders(page);
+            await fetchOrders(page);
         } else {
             alert(res.data.message || '支付失败');
         }
@@ -42,7 +42,7 @@ export default function OrderListPage() {
         if (res.data.success) {
             //alert('订单已取消');
             message.success('订单已取消');
-            fetchOrders(page);
+            await fetchOrders(page);
         } else {
             alert(res.data.message || '取消失败');
         }
@@ -53,12 +53,21 @@ export default function OrderListPage() {
         if (res.data.success) {
             //alert('退款成功');
             message.success('退款成功');
-            fetchOrders(page);
+            await fetchOrders(page);
         } else {
             alert(res.data.message || '退款失败');
         }
     };
-
+    const handleConfirm = async (id) => {
+        const res = await axios.post(`http://localhost:7002/order/confirm/${id}`,null);
+        if (res.data.success) {
+            //alert('退款成功');
+            message.success('收货成功');
+            await fetchOrders(page);
+        } else {
+            alert(res.data.message || '收货失败');
+        }
+    };
     return (
         <div className={styles.container}>
             <h2>📦 我的订单</h2>
@@ -73,7 +82,7 @@ export default function OrderListPage() {
                             </div>
                             <div><strong>状态：</strong>{translateStatus(order.status)}</div>
 
-                            {order.status === 'paid' && order.blindBox && (
+                            {(order.status === 'paid'||order.status==='completed') && order.blindBox && (
                                 <div className={styles.blindBoxInfo}>
                                     <img src={order.blindBox.image} alt="盲盒" className={styles.blindBoxImage} />
                                     <div>{order.blindBox.name}</div>
@@ -88,8 +97,16 @@ export default function OrderListPage() {
                                     </>
                                 )}
                                 {order.status === 'paid' && (
+                                    <>
                                     <button onClick={() => handleRefund(order.id)}>申请退款</button>
+                                    <button onClick={() => handleConfirm(order.id)}>确认收货</button>
+                                    </>
                                 )}
+                            </div>
+                            <div className={styles.timeInfo}>
+                                <div>创建时间：{formatDate(order.createTime)}</div>
+                                {order.payTime && <div>支付时间：{formatDate(order.payTime)}</div>}
+                                {order.arriveTime && <div>收货时间：{formatDate(order.arriveTime)}</div>}
                             </div>
                         </li>
                     ))}
@@ -113,4 +130,8 @@ function translateStatus(status) {
         case 'completed': return '已完成';
         default: return status;
     }
+}
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleString(); // 也可用 toLocaleDateString() 只显示日期
 }

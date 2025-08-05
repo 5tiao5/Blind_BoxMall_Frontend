@@ -21,12 +21,12 @@ const UserProfile = () => {
         }
     };
 
-    const fetchOrders = async () => {
-        const res = await axios.get('http://localhost:7002/order/my');
-        if (res.data.success) {
-            setOrders(res.data.orders || []);
-        }
-    };
+    // const fetchOrders = async () => {
+    //     const res = await axios.get('http://localhost:7002/order/my');
+    //     if (res.data.success) {
+    //         setOrders(res.data.orders || []);
+    //     }
+    // };
 
     const handleAvatarUpload = async (info) => {
         const formData = new FormData();
@@ -55,7 +55,7 @@ const UserProfile = () => {
 
     useEffect(() => {
         fetchUserInfo();
-        fetchOrders();
+        //fetchOrders();
     }, []);
 
     return (
