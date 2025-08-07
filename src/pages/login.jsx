@@ -35,7 +35,7 @@ const LoginPage = () => {
                     updateUser(user);
                 }
 
-                window.location.href = '/home';
+                //window.location.href = '/home';
                 navigate('/home');
             } else {
                 message.error(msg || '用户名或密码错误');

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './SettlePage.module.css';
-
+import gif from  '../assets/box.gif'
 export default function SettlePage() {
     const { orderId } = useParams();
     const [order, setOrder] = useState(null);
@@ -41,7 +41,7 @@ export default function SettlePage() {
     const handleBack = () => {
         if (order?.product?.id) {
             navigate(`/draw/${order.product.id}`, { replace: true });
-            window.location.reload();
+            //window.location.reload();
         }
     };
 
@@ -61,7 +61,7 @@ export default function SettlePage() {
             ) : !showResult ? (
                 <div className={styles.animContainer}>
                     <img
-                        src="/src/assets/box.gif"
+                        src={gif}
                         alt="中奖动画"
                         className={styles.anim}
                     />

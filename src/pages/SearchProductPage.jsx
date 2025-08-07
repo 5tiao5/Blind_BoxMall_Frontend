@@ -3,11 +3,12 @@ import axios from 'axios';
 import styles from './SearchProductPage.module.css';
 import { Input, Button, message } from 'antd';
 import {SearchOutlined} from "@ant-design/icons";
+import {useNavigate} from "react-router-dom";
 
 const SearchProductPage = () => {
     const [keyword, setKeyword] = useState('');
     const [results, setResults] = useState([]);
-
+    const navigate = useNavigate();
     const handleSearch = async () => {
         if (!keyword.trim()) {
             message.warning('请输入关键词');
@@ -27,7 +28,8 @@ const SearchProductPage = () => {
 
     const handleClick = (id) => {
         // 例如跳转到抽盒页面
-        window.location.href = `/draw/${id}`;
+        //window.location.href = `/draw/${id}`;
+        navigate(`/draw/${id}`);
     };
 
     return (

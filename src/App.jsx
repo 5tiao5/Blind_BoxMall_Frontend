@@ -1,5 +1,6 @@
 import  { Routes, Route } from 'react-router-dom';
 import {Layout} from 'antd';
+import React, { useEffect, useState } from 'react';
 import LoginPage from './pages/login.jsx';
 import RegisterPage from "./pages/register.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
@@ -19,13 +20,25 @@ import PlayerShowList from "./pages/PlayerShowList.jsx";
 import PlayerShowCreatePage from "./pages/PlayerShowCreatePage.jsx";
 import PlayerShowDetailPage from "./pages/PlayerShowDetailPage.jsx";
 import SearchProductPage from "./pages/SearchProductPage.jsx";
+import AdminNavbar from "./pages/AdminNavbar.jsx";
 const { Header, Content } = Layout;
 
 
-export default function App() {
-    const isAdmin = localStorage.getItem('isAdmin') === 'true';
-    return (
-        <Layout style={{ background: 'transparent', margin: 0, padding: 0 }}>
+    export default function App() {
+        const [isAdmin, setIsAdmin] = useState(localStorage.getItem('isAdmin') === 'true');
+
+        // 监听 localStorage 中 isAdmin 的变化
+        useEffect(() => {
+            const handleStorageChange = () => {
+                setIsAdmin(localStorage.getItem('isAdmin') === 'true');
+            };
+
+            window.addEventListener('storage', handleStorageChange);
+            return () => window.removeEventListener('storage', handleStorageChange);
+        }, []);
+
+        return (
+        <Layout style={{ background: 'transparent', margin: 0, padding: 0 }} key={isAdmin ? 'admin' : 'user'}>
             <Header
                 className="custom-header"
                 style={{ padding: 0, backgroundColor: 'white', boxShadow: 'none' }}
@@ -52,15 +65,16 @@ export default function App() {
                     />
                     {/*<Route path="/" element={<div>首页内容</div>} />*/}
                     <Route path="/" element={<LoginPage />} />
-                    <Route path="/admin-verify" element={<AdminVerify />} />
+                    <Route path="/admin-verify" element={<AdminVerify key={location.pathname}/>} />
                     <Route path="/draw/:productId" element={<DrawPage />} />
                     {/* 其他路由保留注释或启用 */}
                     {/*<Route path="/categories" element={<Categories />} />*/}
                     {/*<Route path="/about" element={<About />} />*/}
                     {/*<Route path="/cart" element={<Cart />} />*/}
-                    <Route path="create" element={<CreateProduct />} />
-                    <Route path="/app" element={<this />} />
-                    <Route path="/navbar" element={<NavBarmy />} />
+                    <Route path="/create" element={<CreateProduct />} />
+                    <Route path="/app" element={<this key={location.pathname} />} />
+                    <Route path="/navbar" element={<NavBarmy key={location.pathname} />} />
+                    <Route path="/admin-navbar" element={<AdminNavbar key={location.pathname} />} />
                     <Route path="/product-detail/:productId" element={<ProductDetailPage />} />
                     <Route path="/settle/:orderId" element={<SettlePage />} />
                     <Route path="/settle-multi" element={<SettleMultiPage />} />
@@ -76,7 +90,7 @@ export default function App() {
                     } />
                     <Route path="/playershow/create" element={<PlayerShowCreatePage />} />
                     <Route path="/playershow/detail/:id" element={<PlayerShowDetailPage />} />
-                    {/*<Route path="/product-create" element={<CreateProduct />} />*/}
+                    <Route path="/product-create" element={<CreateProduct />} />
                     <Route path="/admin/products" element={<ProductManagerPage />} />
                     <Route path="/search" element={
                         <PrivateRoute>

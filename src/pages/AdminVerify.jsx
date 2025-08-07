@@ -15,8 +15,9 @@ const AdminVerify = () => {
         if (correctCode.data.success) {
             localStorage.setItem('isAdmin', 'true');
             message.success('验证成功，欢迎管理员');
-            //navigate('/product-create');
-            window.location.href = '/create';
+            navigate('/app');
+            window.dispatchEvent(new Event("storage"));
+            // window.location.href = '/create';
         } else {
             message.error('身份码错误');
         }

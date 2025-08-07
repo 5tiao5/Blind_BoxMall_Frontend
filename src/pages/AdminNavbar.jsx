@@ -12,10 +12,14 @@ const { Header, Content } = Layout;
 const AdminLayout = () => {
     const navigate = useNavigate();
     const location = useLocation();
+
     const logout = () => {
         localStorage.clear();
-        window.location.href = '/login';
+        navigate('/app');
+        window.dispatchEvent(new Event("storage"));
+        //navigate(0);
     };
+
     return (
                 <Menu
                     mode="horizontal"

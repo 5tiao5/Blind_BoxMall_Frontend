@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import styles from './SettleMultiPage.module.css';
-
+import gif from  '../assets/box.gif'
 export default function SettleMultiPage() {
     const location = useLocation();
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ export default function SettleMultiPage() {
     const handleBack = () => {
         if (orders.length > 0) {
             navigate(`/draw/${orders[0].product.id}`, { replace: true });
-            window.location.reload();
+            //window.location.reload();
         }
     };
 
@@ -69,7 +69,7 @@ export default function SettleMultiPage() {
                 </>
             ) : !showResult ? (
                 <div className={styles.animContainer}>
-                    <img src="/src/assets/box.gif" alt="抽奖中" className={styles.anim} />
+                    <img src={gif} alt="抽奖中" className={styles.anim} />
                     <div className={styles.animText}>正在揭晓结果...</div>
                 </div>
             ) : (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Card, message } from 'antd';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import axios from "axios";
 
 const RegisterPage = () => {
@@ -9,6 +9,7 @@ const RegisterPage = () => {
     //     message.success('注册成功！');
     //     // TODO: 调用后端 API 完成注册逻辑
     // };
+    const navigate = useNavigate();
     const onFinish = async (values) => {
         const { username, phone, password } = values;
 
@@ -21,7 +22,8 @@ const RegisterPage = () => {
 
             if (response.data.success) {
                 message.success(response.data.message || '注册成功！');
-                window.location.href = '/login'; // 成功后跳转登录页
+                navigate('/login');
+                //window.location.href = '/login'; // 成功后跳转登录页
             } else {
                 message.error(response.data.message || '注册失败，请重试');
             }
